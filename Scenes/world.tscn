@@ -30,4 +30,3 @@ transform = Transform3D(0.788477, -0.52483, -0.320714, 0.345182, -0.0539897, 0.9
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00114, 0)
 
 [node name="test_level" parent="." instance=ExtResource("2_go701")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.159414, -1.89246, 1.38609)

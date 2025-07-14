@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://4k367eet2b6l"]
+[gd_scene load_steps=6 format=3 uid="uid://4k367eet2b6l"]
 
 [ext_resource type="Script" uid="uid://c0p3pei51lvda" path="res://Scripts/player.gd" id="1_v0iea"]
+[ext_resource type="Script" uid="uid://2to7u04sdlp5" path="res://Scripts/camera_rig.gd" id="2_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://d2uuxg05wsjxm" path="res://Meshes/hero_male.glb" id="2_cvnsp"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6t5aa"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yp4wr"]
 
@@ -10,10 +13,13 @@ script = ExtResource("1_v0iea")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("SphereShape3D_6t5aa")
 spring_length = 3.0
+margin = 0.6
+script = ExtResource("2_6t5aa")
 
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.005, 0, 3)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.937657, 0)
