@@ -2,12 +2,14 @@ extends CharacterBody3D
 
 
 const SPEED = 5.0
-const JUMP_VELOCITY = 5
+const JUMP_VELOCITY = 7.5
 
 @onready var camera: Camera3D = $CameraRig/Camera3D
+@onready var animation_player: AnimationPlayer = $Mesh/AnimationPlayer
+@onready var animation_tree: AnimationTree = $AnimationTree
 
-func abc() -> float:
-	return 2.0
+var last_lean := 0.0
+
 
 func _physics_process(delta: float)-> void:
 	# Add the gravity.
@@ -32,6 +34,24 @@ func _physics_process(delta: float)-> void:
 
 	move_and_slide()
 	turn_to(direction)
+	
+	var current_speed := velocity.length()
+	const RUN_SPEED := 3.5
+	const BLEND_SPEED := 0.25
+	
+	if !is_on_floor():
+		animation_tree.set("parameters/movement/transition_request", "fall")
+	elif current_speed > RUN_SPEED:
+		animation_tree.set("parameters/movement/transition_request", "run")
+		var lean := direction.dot(global_basis.x)
+		last_lean = lerpf(last_lean, lean, 0.2)
+		animation_tree.set("parameters/run_lean/add_amount", last_lean)
+	elif current_speed > 0:
+		animation_tree.set("parameters/movement/transition_request", "walk")
+		var walk_speed := lerpf(0.5, 1.75, current_speed / RUN_SPEED)
+		animation_tree.set("parameters/walk_speed/scale", walk_speed)
+	else:
+		animation_tree.set("parameters/movement/transition_request", "idle")
 
 func turn_to(direction: Vector3) -> void:
 	if direction.length() > 0:
