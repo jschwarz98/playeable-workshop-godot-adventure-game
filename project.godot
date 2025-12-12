@@ -12,8 +12,12 @@ config_version=5
 
 config/name="Playable Workshop Adventure Game"
 run/main_scene="uid://bk2d01p30mpun"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+PlayerStates="*res://Scripts/player/player_state/player_states.gd"
 
 [debug]
 
@@ -21,8 +25,8 @@ gdscript/warnings/untyped_declaration=2
 
 [display]
 
-window/size/viewport_width=1503
-window/size/viewport_height=962
+window/size/viewport_width=1280
+window/size/viewport_height=720
 
 [input]
 
